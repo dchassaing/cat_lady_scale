@@ -46,6 +46,9 @@ $(document).ready(function(){
         new Behavior("own more than one cat", 5),
         new Behavior("own more than one dog", -5),
         new Behavior("takes selfies with cats", 4),
+        new Behavior("goes to National poodle show", -7),
+        new Behavior("knows several dog breeders and trainers", -3),
+        new Behavior("friends with cat ladies", 4)
         // -----------------------------------------------------------------------------------------
         // TODO: CHALLENGE 1
         // add some more behaviors cat lady behaviors here to customize your app!
@@ -89,6 +92,8 @@ $(document).ready(function(){
             // 2. now that a new behavior is added... update *this* cat lady's status (hint you
             //    should just call a function in this object)
             //--------------------------------------------------------------------------------------
+            this.behaviors.push(newBehavior);
+            this.updateStatus();
         },
         status: CAT_LADY_SCALE[5], // just the inital status... INDIFFERENT
         updateStatus: function () {
@@ -100,6 +105,10 @@ $(document).ready(function(){
             //    point values. ** when adding up the point values, start the sum at 5 (indifferent)
             //    on the scale.
             //--------------------------------------------------------------------------------------
+            var sum = 5;
+            for (var i = 0; i < this.behaviors.length; i++) {
+                sum += this.behaviors[i];
+            }
 
             //--------------------------------------------------------------------------------------
             // TODO: CHALLENGE 9
@@ -108,6 +117,8 @@ $(document).ready(function(){
             // corresponding scale position. And then update this catLady status property.
             //--------------------------------------------------------------------------------------
 
+            var statusNumber = sum / this.behaviors.length;
+            this.status = CAT_LADY_SCALE[statusNumber];
         },
     };
 
@@ -166,6 +177,7 @@ $(document).ready(function(){
         // 1. get the list item from the behavior object (see the behavior prototype)
         // 2. append the list item to the behavior list element in the html
         //------------------------------------------------------------------------------------------
+        $(.this).
     }
 
     /*
