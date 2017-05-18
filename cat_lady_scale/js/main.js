@@ -177,8 +177,8 @@ $(document).ready(function(){
         // 1. get the list item from the behavior object (see the behavior prototype)
         // 2. append the list item to the behavior list element in the html
         //------------------------------------------------------------------------------------------
-        $(.this).getListItem();
-        $(".behavior-list").append();
+        $(.this).getListItem().append();
+        $(.this).append();
     }
 
     /*
