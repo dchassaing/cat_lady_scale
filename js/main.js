@@ -145,24 +145,25 @@ $(document).ready(function(){
         //    different options in dropdown and observe what happens to the html.
         //------------------------------------------------------------------------------------------
         $('#behavior-select','.behavior','value').select();
+        //console.log('value');
+        // $('#behavior-select').val();
         //------------------------------------------------------------------------------------------
         // TODO: CHALLENGE 6
         // 3. Use the index value from step 2, to get the correct cat lady behavior from the
         //    catLadyBehaviors array.
         // 4. Now add the behavior to the catLady object.
         //------------------------------------------------------------------------------------------
-
-        // .this.behavior.addBehavior();
+        catLadyBehaviors[value].addBehavior(catLady);
         //------------------------------------------------------------------------------------------
         // TODO: CHALLENGE 7
         // 5. Display the newly added behavior with the displayNewBehavior function.
         //------------------------------------------------------------------------------------------
-
+        catLady.behavior.displayNewBehavior();
         //------------------------------------------------------------------------------------------
         // TODO: CHALLENGE 10
         // 1. Display the cat lady status, with the displayStatus function;
         //------------------------------------------------------------------------------------------
-
+        catLady.behavior.displayStatus();
     });
 
     /*
@@ -195,7 +196,10 @@ $(document).ready(function(){
         // 2. update the status title in the html
         // ** make sure to checkout the status object for help!
         //------------------------------------------------------------------------------------------
+        $(this.status).text('status-section','.status-display', '.status-image'); //may be updateStatus?
+        $(this.status).text('status-section','.status-display', '.status-title'); //may be updateStatus?
     }
+
 
     /*
      * Fill Behavior Drop Down
