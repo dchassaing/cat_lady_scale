@@ -137,14 +137,14 @@ $(document).ready(function(){
         // TODO: CHALLENGE 4
         // 1. Prevent the default page reload using jquery.
         //------------------------------------------------------------------------------------------
-
+    $(".onClick").preventDefault();
         //------------------------------------------------------------------------------------------
         // TODO: CHALLENGE 5
         // 2. Grab the catLadyBehavior index value from the behavior option in the behavior-select
         //    field located in the html. This will be tricky... before you start try selecting
         //    different options in dropdown and observe what happens to the html.
         //------------------------------------------------------------------------------------------
-
+        $('#behavior-select','.behavior','value').select();
         //------------------------------------------------------------------------------------------
         // TODO: CHALLENGE 6
         // 3. Use the index value from step 2, to get the correct cat lady behavior from the
@@ -152,6 +152,7 @@ $(document).ready(function(){
         // 4. Now add the behavior to the catLady object.
         //------------------------------------------------------------------------------------------
 
+        // .this.behavior.addBehavior();
         //------------------------------------------------------------------------------------------
         // TODO: CHALLENGE 7
         // 5. Display the newly added behavior with the displayNewBehavior function.
@@ -177,8 +178,8 @@ $(document).ready(function(){
         // 1. get the list item from the behavior object (see the behavior prototype)
         // 2. append the list item to the behavior list element in the html
         //------------------------------------------------------------------------------------------
-        $(.this).getListItem();
-        $(".behavior-list").append();
+        $(behavior).getListItem();
+        $(".behavior-list").append(listItem);
     }
 
     /*
