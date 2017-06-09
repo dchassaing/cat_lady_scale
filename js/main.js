@@ -46,7 +46,7 @@ $(document).ready(function(){
         new Behavior("own more than one cat", 5),
         new Behavior("own more than one dog", -5),
         new Behavior("takes selfies with cats", 4),
-        new Behavior("goes to National poodle show", -7),
+        new Behavior("goes to National poodle show", -4),
         new Behavior("knows several dog breeders and trainers", -3),
         new Behavior("friends with cat ladies", 4)
         // -----------------------------------------------------------------------------------------
@@ -95,6 +95,7 @@ $(document).ready(function(){
             this.behaviors.push(newBehavior);
             this.updateStatus();
         },
+
         status: CAT_LADY_SCALE[5], // just the inital status... INDIFFERENT
         updateStatus: function () {
             //--------------------------------------------------------------------------------------
@@ -105,9 +106,9 @@ $(document).ready(function(){
             //    point values. ** when adding up the point values, start the sum at 5 (indifferent)
             //    on the scale.
             //--------------------------------------------------------------------------------------
-            var sum = 5;
+            var sum = 0;
             for (var i = 0; i < this.behaviors.length; i++) {
-                sum += this.behaviors[i];
+                sum += this.behaviors[i].pointValue;
             }
 
             //--------------------------------------------------------------------------------------
@@ -117,7 +118,7 @@ $(document).ready(function(){
             // corresponding scale position. And then update this catLady status property.
             //--------------------------------------------------------------------------------------
 
-            var statusNumber = sum / this.behaviors.length;
+            var statusNumber = (Math.round(sum / this.behaviors.length)) + 5;
             this.status = CAT_LADY_SCALE[statusNumber];
         },
     };
@@ -137,33 +138,43 @@ $(document).ready(function(){
         // TODO: CHALLENGE 4
         // 1. Prevent the default page reload using jquery.
         //------------------------------------------------------------------------------------------
-    $(".onClick").preventDefault();
+      e.preventDefault();
         //------------------------------------------------------------------------------------------
         // TODO: CHALLENGE 5
         // 2. Grab the catLadyBehavior index value from the behavior option in the behavior-select
         //    field located in the html. This will be tricky... before you start try selecting
         //    different options in dropdown and observe what happens to the html.
         //------------------------------------------------------------------------------------------
-        $('#behavior-select','.behavior','value').select();
-        //console.log('value');
-        // $('#behavior-select').val();
+          var optionSelected = $('#behavior-select option[selected]');
+          var index = optionSelected.attr('value');
+
+          var valid = true;
+          if(index === '-1'){
+            valid = false;
+          }
+
         //------------------------------------------------------------------------------------------
         // TODO: CHALLENGE 6
         // 3. Use the index value from step 2, to get the correct cat lady behavior from the
         //    catLadyBehaviors array.
         // 4. Now add the behavior to the catLady object.
         //------------------------------------------------------------------------------------------
-        catLadyBehaviors[value].addBehavior(catLady);
-        //------------------------------------------------------------------------------------------
-        // TODO: CHALLENGE 7
-        // 5. Display the newly added behavior with the displayNewBehavior function.
-        //------------------------------------------------------------------------------------------
-        catLady.behavior.displayNewBehavior();
-        //------------------------------------------------------------------------------------------
-        // TODO: CHALLENGE 10
-        // 1. Display the cat lady status, with the displayStatus function;
-        //------------------------------------------------------------------------------------------
-        catLady.behavior.displayStatus();
+        if (valid){
+          var behavior = catLadyBehaviors[index];
+          catLady.addBehavior(behavior);
+
+         //------------------------------------------------------------------------------------------
+         // TODO: CHALLENGE 7
+         // 5. Display the newly added behavior with the displayNewBehavior function.
+         //------------------------------------------------------------------------------------------
+         displayNewBehavior(behavior);
+         //------------------------------------------------------------------------------------------
+         // TODO: CHALLENGE 10
+         // 1. Display the cat lady status, with the displayStatus function;
+         //------------------------------------------------------------------------------------------
+         displayStatus(catLady.status);
+        }
+
     });
 
     /*
@@ -179,7 +190,7 @@ $(document).ready(function(){
         // 1. get the list item from the behavior object (see the behavior prototype)
         // 2. append the list item to the behavior list element in the html
         //------------------------------------------------------------------------------------------
-        $(behavior).getListItem();
+        var listItem = $((behavior).getListItem());
         $(".behavior-list").append(listItem);
     }
 
@@ -196,8 +207,9 @@ $(document).ready(function(){
         // 2. update the status title in the html
         // ** make sure to checkout the status object for help!
         //------------------------------------------------------------------------------------------
-        $(this.status).text('status-section','.status-display', '.status-image'); //may be updateStatus?
-        $(this.status).text('status-section','.status-display', '.status-title'); //may be updateStatus?
+console.log(catLadyStatus);
+        $(".status-image img").attr("src", catLadyStatus.imagePath());
+        $(".status-title").text(catLadyStatus.title);
     }
 
 
